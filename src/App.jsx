@@ -4,6 +4,7 @@ import {
   WandSparkles, Sparkles, Heart, Dog, ScrollText, Volume2, Star, Play, Pause, Radio, Lightbulb
 } from 'lucide-react'
 import InvitationExperience from './InvitationExperience'
+import Scrapbook from './Scrapbook'
 
 const MagicScene = lazy(() => import('./MagicScene'))
 
@@ -868,6 +869,15 @@ function App() {
           <div className="hero-scroll">SCROLL TO DISCOVER <span /></div>
         </section>
 
+        <nav className="quick-nav" aria-label="Quick navigation">
+          <a href="#years">The Map</a>
+          <a href="#prophet">The Prophet</a>
+          <a href="#patronus">Patronus</a>
+          <a href="#wireless">Wireless</a>
+          <a href="#memories">Memories</a>
+          <a href="#mirror">The Mirror</a>
+        </nav>
+
         <AnimatePresence>
           {letterOpen && <InvitationExperience onClose={() => setLetterOpen(false)} closeButtonRef={letterCloseRef} />}
         </AnimatePresence>
@@ -925,6 +935,11 @@ function App() {
         <section className="section wireless-section" id="wireless">
           <SectionHeading eyebrow="TUNE IN · TUNE OUT THE MUGGLES" title="Wizarding Wireless" subtitle="The soundtrack to a Gryffindor kind of life." />
           <WizardingWireless />
+        </section>
+
+        <section className="section scrapbook-section" id="memories">
+          <SectionHeading eyebrow="A KEEPSAKE FROM THE CASTLE" title="Down the Memory Lane" subtitle="Little moments, endless memories, and a story worth keeping." />
+          <Scrapbook />
         </section>
 
         <section className="section mirror-section" id="mirror">
