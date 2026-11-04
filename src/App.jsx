@@ -9,10 +9,10 @@ import Scrapbook from './Scrapbook'
 const MagicScene = lazy(() => import('./MagicScene'))
 
 const years = [
-  { year: '2022 · YEAR ONE', title: 'The Sorting Ceremony', text: 'A new castle, new faces, and a Gryffindor who was already making an entrance. The beginning of a rather eventful legend.', photo: 'Her Year 1 photo' },
-  { year: '2023 · YEAR TWO', title: 'Chamber of Giggles', text: 'More memories, more chaos, and the discovery that punctuality was apparently an optional subject.', photo: 'Her Year 2 photo' },
-  { year: '2024 · YEAR THREE', title: 'The Prisoner of Procrastination', text: 'Big adventures, bigger laughs, and absolutely no sense of urgency. Somehow, she still made every moment count.', photo: 'Her Year 3 photo' },
-  { year: '2025–2026 · YEAR FOUR', title: 'The Goblet of Greatness', text: 'The final college chapter: a brilliant dancer, a flute-playing enchantress, and the main character of every room she walks into.', photo: 'Her final-year photo' },
+  { year: '2022 · YEAR ONE', title: 'The Sorting Ceremony', text: 'A new castle, new faces, and a Gryffindor who was already making an entrance. The beginning of a rather eventful legend.', photo: 'Her Year 1 photo', image: '/assets/Year%201.jpeg' },
+  { year: '2023 · YEAR TWO', title: 'Chamber of Giggles', text: 'More memories, more chaos, and the discovery that punctuality was apparently an optional subject.', photo: 'Her Year 2 photo', image: '/assets/Year-2.jpg' },
+  { year: '2024 · YEAR THREE', title: 'The Prisoner of Procrastination', text: 'Big adventures, bigger laughs, and absolutely no sense of urgency. Somehow, she still made every moment count.', photo: 'Her Year 3 photo', image: '/assets/Year%203.jpg' },
+  { year: '2025–2026 · YEAR FOUR', title: 'The Goblet of Greatness', text: 'The final college chapter: a brilliant dancer, a flute-playing enchantress, and the main character of every room she walks into.', photo: 'Her final-year photo', image: '/assets/Year%204.jpeg' },
 ]
 
 const tracks = [
@@ -69,6 +69,30 @@ const SectionHeading = memo(function SectionHeading({ eyebrow, title, subtitle }
     <div className="gold-rule" />
     <p>{subtitle}</p>
   </div>
+})
+
+const MapMemoryPhoto = memo(function MapMemoryPhoto({ src, alt, className }) {
+  const [hasError, setHasError] = useState(false)
+
+  if (hasError) {
+    return (
+      <div className={`${className} map-photo-fallback`} role="img" aria-label={`${alt} unavailable`}>
+        <span aria-hidden="true">✧</span>
+        <small>Memory photo unavailable</small>
+      </div>
+    )
+  }
+
+  return (
+    <img
+      className={className}
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      onError={() => setHasError(true)}
+    />
+  )
 })
 
 const WizardingWireless = memo(function WizardingWireless() {
@@ -477,11 +501,11 @@ const MaraudersMap = memo(function MaraudersMap() {
               <span className="map-handwritten">{activeMemory.note}</span>
             </div>
             <div className="map-photo-frame">
-              <div className="map-photo-placeholder">
-                <span aria-hidden="true">✧</span>
-                <strong>{activeMemory.photo}</strong>
-                <small>Drop a photo here when you're ready</small>
-              </div>
+              <MapMemoryPhoto
+                className="map-photo-image"
+                src={activeMemory.image}
+                alt={`${activeMemory.photo}, ${activeMemory.year}`}
+              />
               <span className="map-photo-caption">MEMORY NO. 0{mapLocations.indexOf(activeMemory) + 1}</span>
             </div>
           </motion.article>

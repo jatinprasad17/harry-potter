@@ -425,9 +425,10 @@ main > section:not(.is-in-view) * { animation-play-state: paused !important; }
 }
 
 .map-location-label {
-  width: 155px;
+  width: 172px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 3px;
   padding: 7px 9px;
   border: 1px solid transparent;
@@ -522,22 +523,32 @@ main > section:not(.is-in-view) * { animation-play-state: paused !important; }
 .map-handwritten { display: inline-block; margin-top: 15px; color: #795b39; font: .68rem 'Homemade Apple', cursive; transform: rotate(-3deg); }
 
 .map-photo-frame {
+  min-width: 0;
   padding: 10px 10px 6px;
+  border-radius: 3px;
   border: 1px solid #967748;
   background: linear-gradient(145deg, #efdfbb, #c9b184);
-  box-shadow: 0 5px 14px rgba(64, 43, 21, .22), inset 0 0 0 3px rgba(255, 247, 221, .48);
+  box-shadow: 0 5px 14px rgba(64, 43, 21, .22), 0 0 18px rgba(218, 172, 80, .16), inset 0 0 0 3px rgba(255, 247, 221, .48);
   transform: rotate(1.2deg);
 }
 
-.map-photo-placeholder {
-  min-height: 160px;
+.map-photo-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(125, 92, 48, .65);
+  border-radius: 2px;
+  background: #e6d5b0;
+  object-fit: contain;
+}
+
+.map-photo-fallback {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px;
-  border: 1px dashed rgba(125, 92, 48, .65);
+  padding: 10px;
   background:
     radial-gradient(ellipse at 50% 40%, rgba(255, 245, 218, .35), transparent 65%),
     linear-gradient(145deg, rgba(150, 119, 70, .12), rgba(112, 82, 45, .17));
@@ -545,9 +556,13 @@ main > section:not(.is-in-view) * { animation-play-state: paused !important; }
   text-align: center;
 }
 
-.map-photo-placeholder > span { color: #9c7537; font-size: 1.65rem; }
-.map-photo-placeholder strong { font: 600 .71rem Cinzel, serif; }
-.map-photo-placeholder small { color: #826b4b; font-size: .63rem; }
+.map-photo-image.map-photo-fallback {
+  aspect-ratio: 3 / 4;
+  border: 1px dashed rgba(125, 92, 48, .65);
+}
+
+.map-photo-fallback > span { color: #9c7537; font-size: 1.4rem; }
+.map-photo-fallback small { color: #826b4b; font-size: .63rem; }
 .map-photo-caption { display: block; margin-top: 6px; color: #755a37; font: 600 .48rem Cinzel, serif; letter-spacing: .14em; text-align: center; }
 
 .prophet-paper {
@@ -1701,7 +1716,7 @@ footer span { padding: 0 8px; color: var(--gold); }
   .hero-meta { margin-top: 38px; }
   .floating-note { font-size: .75rem; }
   .marauders-map-shell { padding: 14px; }
-  .map-location-label { width: 140px; }
+  .map-location-label { width: 155px; }
   .map-memory-card { gap: 18px; padding: 17px; }
   .prophet-content { grid-template-columns: .9fr 1.1fr; }
   .paper-masthead { font-size: .48rem; }
@@ -1755,7 +1770,6 @@ footer span { padding: 0 8px; color: var(--gold); }
   .map-memory-copy h3 { font-size: 1.65rem; }
   .map-memory-copy p { font-size: .94rem; line-height: 1.5; }
   .map-photo-frame { width: min(100%, 300px); justify-self: center; }
-  .map-photo-placeholder { min-height: 132px; }
   .prophet-paper { padding: 11px; border-width: 4px; }
   .paper-masthead { flex-wrap: wrap; justify-content: center; font-size: .4rem; letter-spacing: .04em; }
   .prophet-paper > h3 { font-size: clamp(2.2rem, 10vw, 3rem); line-height: 1.08; }
