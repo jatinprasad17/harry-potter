@@ -24,7 +24,7 @@ const memories = [
     id: 4,
     image: "/assets/down-the-memory-lane/memory-04.jpg",
     caption: "Ek Half Fry and Butter Toast",
-    date: "Favourite Breakast",
+    date: "Favourite Breakfast",
     year: "06/02/2024",
   },
   {
