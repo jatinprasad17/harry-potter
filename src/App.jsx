@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { lazy, memo, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import {
-  WandSparkles, Sparkles, Heart, Dog, ScrollText, Volume2, Star, Play, Pause, Radio, Lightbulb
+  WandSparkles, Sparkles, Dog, ScrollText, Volume2, Star, Play, Pause, Radio, Lightbulb
 } from 'lucide-react'
 import InvitationExperience from './InvitationExperience'
 import Scrapbook from './Scrapbook'
@@ -9,10 +9,10 @@ import Scrapbook from './Scrapbook'
 const MagicScene = lazy(() => import('./MagicScene'))
 
 const years = [
-  { year: '2022 · YEAR ONE', title: 'The Sorting Ceremony', text: 'A new castle, new faces, and a Gryffindor who was already making an entrance. The beginning of a rather eventful legend.', photo: 'Her Year 1 photo', image: '/assets/Year%201.jpeg' },
-  { year: '2023 · YEAR TWO', title: 'Chamber of Giggles', text: 'More memories, more chaos, and the discovery that punctuality was apparently an optional subject.', photo: 'Her Year 2 photo', image: '/assets/Year-2.jpg' },
-  { year: '2024 · YEAR THREE', title: 'The Prisoner of Procrastination', text: 'Big adventures, bigger laughs, and absolutely no sense of urgency. Somehow, she still made every moment count.', photo: 'Her Year 3 photo', image: '/assets/Year%203.jpg' },
-  { year: '2025–2026 · YEAR FOUR', title: 'The Goblet of Greatness', text: 'The final college chapter: a brilliant dancer, a flute-playing enchantress, and the main character of every room she walks into.', photo: 'Her final-year photo', image: '/assets/Year%204.jpeg' },
+  { year: '2023 · YEAR ONE', title: 'The Sorting Ceremony', text: 'A little Janmashtami magic, a Gryffindor girl, and a hard launch that started our very own Hogwarts story', photo: 'Her Year 1 photo', image: '/assets/Year%201.jpeg' },
+  { year: '2024 · YEAR TWO', title: 'Chamber of Giggles', text: 'For a moment, it felt like we were the hero and heroine of our own little Bollywood movie at Solang Valley', photo: 'Her Year 2 photo', image: '/assets/Year-2.jpg' },
+  { year: '2025 · YEAR THREE', title: 'The Prisoner of Procrastination', text: 'Running late is her love language. Waiting patiently is mine. After all, some masterpieces are worth the wait.', photo: 'Her Year 3 photo', image: '/assets/Year%203.jpg' },
+  { year: '2026 · YEAR FOUR', title: 'The Goblet of Greatness', text: 'Started as two students figuring out college life, ended as two graduates with a lifetime of memories. From Year 1 to Year 4, always grateful we had each other.', photo: 'Her final-year photo', image: '/assets/Year%204.jpeg' },
 ]
 
 const tracks = [
@@ -612,7 +612,7 @@ const PatronusExperience = memo(function PatronusExperience() {
         aria-pressed={hasCast}
       >
         <Sparkles size={16} />
-        {hasCast ? 'Cast Again ✨' : 'Expecto Patronum ✨'}
+        {hasCast ? 'Cast Again ✨' : 'पितृदेव संरक्षकणम् ✨'}
       </button>
       {playbackError && <p className="patronus-playback-error" role="alert">{playbackError}</p>}
       <div className="patronus-stars" aria-hidden="true">✦　✧　✦</div>
@@ -706,9 +706,14 @@ const MirrorExperience = memo(function MirrorExperience() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: reduceMotion ? 0 : 1.25, ease: [.2, .75, .22, 1] }}
               >
-                <Heart size={34} />
-                <strong>Your favourite photo together</strong>
-                <span>Replace this with your favourite memory</span>
+                <img
+                  className="mirror-memory-photo"
+                  src="/assets/our-best-picture.jpeg"
+                  alt="Our favourite picture together by a waterfall"
+                  decoding="async"
+                />
+                <strong>Our happiest moment, held in the mirror</strong>
+                <span>"I show not your face but your heart's desire"</span>
               </motion.span>
             ) : (
               <motion.span
@@ -720,8 +725,8 @@ const MirrorExperience = memo(function MirrorExperience() {
                 transition={{ duration: reduceMotion ? 0 : .7 }}
               >
                 <Sparkles size={24} />
-                <strong>Look a little closer</strong>
-                <span>The mirror remembers what matters.</span>
+                <strong>Look into the mirror</strong>
+                <span>A little magic is waiting to show you our greatest treasure.</span>
               </motion.span>
             )}
           </AnimatePresence>
@@ -739,7 +744,7 @@ const MirrorExperience = memo(function MirrorExperience() {
         transition={{ duration: reduceMotion ? 0 : .65 }}
         aria-live="polite"
       >
-        Some moments become memories. Some people make those memories magical.
+        The Mirror of Erised shows what the heart holds closest. Ours is every moment together.
       </motion.p>
     </div>
   )
@@ -932,21 +937,25 @@ function App() {
               </div>
               <div className="prophet-story">
                 <span className="story-kicker">BREAKING · HOGWARTS</span>
-                <h4>VANSHIKA TURNS 23; CASTLE REPORTS UNPRECEDENTED LEVELS OF DANCE ENERGY</h4>
-                <p><strong>HOGWARTS —</strong> Witnesses confirm that the Gryffindor's dance moves continue to defy the laws of physics. Experts remain unable to explain how someone with such a relaxed attitude towards time can still arrive and steal the show.</p>
-                <p>Friends describe her as “one of a kind”, “perpetually eepy” and “the person with the big eyes you simply cannot say no to.”</p>
+                <h4>VANSHIKA TURNS 23: GRYFFINDOR WITCH DEFIES TIME, ACES EXAMS OVERNIGHT AND CONTINUES TO CHARM THE ENTIRE CASTLE</h4>
+                <p><strong>HOGWARTS —</strong>Witnesses report that Miss Vanshika Sharma, famously known as Bondhi, has once again demonstrated an extraordinary ability to operate entirely outside the laws of time.</p>
+                <p>Despite possessing absolutely no sense of urgency, sources confirm she can take several hours to get ready, arrive fashionably late and still somehow look like the main character. Experts remain baffled by how anyone can be this eepy and this effortlessly charming.</p>
+                <p>Academic authorities are equally confused. Reports suggest that she requires approximately one night of preparation before examinations, only to emerge the following morning with top grades. The Ministry of Magic has launched an investigation into this suspicious academic phenomenon.</p>
+                <p>But her talents don't end there. The castle has witnessed unprecedented levels of dance energy, while her flute performances have left even the most experienced wizards spellbound.Close friends describe her as "a brilliant dancer, a magical flutist, a professional procrastinator and a certified sleepyhead."</p>
+                <p>The castle advises all residents to exercise caution and beaware of my smol kitten: prolonged exposure to her smile may result in permanent attachment.</p>
+
               </div>
             </div>
             <div className="prophet-bottom"><span>FLUTE ALERT: BEAUTIFUL MELODIES REPORTED</span><span>ANGY BIRD: ADORABLE, EVEN WHEN FURIOUS</span></div>
           </article>
           <div className="owl-grid">
             {[
-              ['OUTSTANDING', 'Making every room brighter'],
+              ['ALWAYS HIGH', 'Eepy levels'],
               ['OUTSTANDING', 'Dance floor domination'],
-              ['EXCEEDS EXPECTATIONS', 'Flute enchantments'],
-              ['TROLL (AFFECTIONATE)', 'Sense of urgency'],
-              ['OUTSTANDING', 'Being a dog person'],
-              ['UNCLASSIFIED', 'Bondhi since birth? Case pending.'],
+              ['MINISTRY LEVEL EXPERTISE', 'Procrastination'],
+              ['NON EXISTENT', 'Sense of urgency'],
+              ['AWW', 'Being a dog person'],
+              ['BAAD ME ', 'Bachpan se Bondhi thi ya Baad me Bani?'],
             ].map(([grade, skill]) => <div className="owl-card" key={skill}><span>{grade}</span><p>{skill}</p></div>)}
           </div>
         </section>
@@ -967,7 +976,7 @@ function App() {
         </section>
 
         <section className="section mirror-section" id="mirror">
-          <SectionHeading eyebrow="A GLIMPSE OF WHAT MATTERS" title="The Mirror of Erised" subtitle="Some memories deserve their own frame." />
+          <SectionHeading eyebrow="A WIZARDING WORLD KEEPSAKE" title="The Mirror of Erised" subtitle="Our Best Picture Together , Deserves a Separate Frame" />
           <MirrorExperience />
         </section>
 

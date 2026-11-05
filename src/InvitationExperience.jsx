@@ -3,10 +3,25 @@ import { Volume2, VolumeX, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const letterSegments = [
-  { heading: true, text: 'Dear Miss Vanshika,' },
-  { text: 'We are delighted to inform you that you have been selected for another extraordinary year of magic, mischief, questionable time management and absolutely legendary dancing.' },
-  { text: 'Your place in Gryffindor remains secure. Your wand is ready, your people are cheering, and the castle has saved you the biggest slice of cake.' },
-  { signoff: true, text: 'The adventure continues. Happy 23rd Birthday!' },
+  { heading: true, text: 'Dear Pookie Vanshika Sharma' },
+  { text: 'Kaha se shuru karu? Four years, from that first meeting and your "Achha, tum hi Jatin ho?" to our Dharamshala trip, we\'ve come a really long way. We\'ve seen so many ups and downs, had countless fights, disagreements, stupid arguments, and somehow collected a lifetime of memories in these four years.' },
+  { text: 'There are so many moments that I wish I could relive and honestly, even after all this time there are things about you that I don\'t think me will ever get tired of. My smol kitten\'s big eyes, I don\'t think me ever told you enough how much I love them. And bondhi, when you wear my fav green dress, kya hi kehne! You just look SO GOOD. Your puppy eyes, your pookie voice, and muh fulai when angy these are the thing that I\'ll always adore.' },
+  { text: 'I still remember all our trips Shangarh, Griffin, Triund, Dharamshala and all those plans that took forever to finally happen. There were so many hiccups in between, but one thing that I\'ll always be grateful for is how you stood by me and supported me. You listened to my endless rants, tolerated my nonsense and gave me a space where I could just be myself and I am always thankful for that.' },
+  { text: 'And speaking of Griffin, I don\'t think you realise how special that moment was for me, You were playing "Arz Kiya Hai" and I can still feel goosebumps thinking about it. I remember recording you, hoping you\'d play a little more because I\'ve always loved the flute. I genuinely hope I get to witness many more such moments.', italic: 'Arz Kiya Hai' },
+  { text: 'Also, let\'s not forget that you\'re THE BEST DANCER, NIGGA! The way you dance,  the way you enjoy yourself is just something else. Never stop dancing, never stop playing your flute and never stop doing the things that makes you YOU.' },
+  { text: 'I know things between us haven\'t been the best lately. We\'ve made mistakes, hurt each other and things haven\'t turned out the way we imagined. I know I\'ve made my share of mistakes too, and I genuinely hope that someday you\'ll be able to forgive me for all the ways I\'ve hurt you ,I don\'t want this letter to sound like an apology or a goodbye, but I also don\'t want to pretend that everything is perfect :(' },
+  { text: 'The truth is ,there hasn\'t been a single day when I do not think about you ,no matter how things are between us, you still cross my mind, and I guess that\'s what happens when someone becomes such an important part of your life.' },
+  { text: 'As you turn 23, you\'re entering a whole new phase of life ,you\'ll meet so many new people, make new friends, lose some along the way, discover new things and experience so much. But through all of it, I have just one request, never lose your passion or your love for the things you do. Keep exploring, keep travelling, keep dancing, keep playing your flute and keep finding reasons to be excited about life.', bold: 'never lose your passion or your love for the things you do.' },
+  { text: 'I know we\'re going to be separated. I\'ll be in Japan and you\'ll be in Bangalore, Life will get busy, we\'ll have our own responsibilities and maybe things won\'t be as easy as they used to be or are currently, But before anything else, we were best friends. We shared almost everything with each other, and I don\'t want you to ever feel that you can\'t reach out to me.' },
+  { text: 'I\'ll always be there to listen to your rants, your problems, your random stories and all the little things you want to share, just like you\'ve always been there to listen to mine ,distance shouldn\'t make you feel that you\'ve lost someone you could talk to.' },
+  { text: 'You know, one thing that I am absolutely sure about is that you\'re the only person I\'ve found in college with whom I could be completely childish, show my emotions without thinking twice, act stupid, share literally anything and just be myself. I hope you never lose that little child in you. Keep that pookie voice, those puppy eyes, your craziness and those nonchalant vibes' },
+  { text: 'And please, take care of yourself. Keep meditating like you do, exercise, go running, attend dance workshops, travel to new places, buy those cute dresses you love and, most importantly, enjoy your life to the fullest. Don\'t keep waiting for the perfect time or the perfect company to do things. Just go out there and live!' },
+  { text: 'I genuinely believe you\'re a winning machine. Whatever field you choose, whatever you decide to pursue, I know you\'ll make it happen. You have so much potential, so much talent and so much passion. I hope this brings you opportunities, happiness, adventures and everything you\'ve been wishing for.' },
+  { text: 'And lastly, despite all the fights, mistakes, difficult phases and everything in between, this is a bond I\'ll cherish forever. I\'ll always look back at these four years with a smile, remembering our stupid fights, endless conversations, trips, laughter and all those moments that made college feel like home.' },
+  { bold: true, text: 'Thank you for being my person, my best friend and my favourite pookie and I\'ll always see you as my smol kitten' },
+  { bold: true, text: 'Happy 23rd Birthday once again, Vanshika!' },
+  { text: 'Me love you, pookie. ❤️' },
+  { signoff: true, bold: true, text: '– Jatin' },
 ]
 const fullLetterLength = letterSegments.reduce((length, segment) => length + segment.text.length, 0)
 
@@ -43,6 +58,24 @@ function playSealChime(audioContextRef) {
   })
 }
 
+function renderLetterText(segment, text) {
+  const markedText = segment.italic ?? (typeof segment.bold === 'string' ? segment.bold : null)
+  if (!markedText) return segment.bold ? <strong>{text}</strong> : text
+
+  const markStart = segment.text.indexOf(markedText)
+  const visibleStart = Math.min(text.length, markStart)
+  const visibleEnd = Math.min(text.length, markStart + markedText.length)
+  const Mark = segment.italic ? 'em' : 'strong'
+
+  return (
+    <>
+      {text.slice(0, visibleStart)}
+      {visibleEnd > visibleStart && <Mark>{text.slice(visibleStart, visibleEnd)}</Mark>}
+      {text.slice(visibleEnd)}
+    </>
+  )
+}
+
 function LetterCopy({ characterCount, complete }) {
   let offset = 0
 
@@ -54,8 +87,10 @@ function LetterCopy({ characterCount, complete }) {
         const text = segment.text.slice(0, Math.max(0, characterCount - start))
         if (!text) return null
         if (segment.heading) return <h2 key={segment.text}>{text}</h2>
-        if (segment.signoff) return <p className="invitation-signoff" key={segment.text}>{text}</p>
-        return <p key={segment.text}>{text}</p>
+        const content = renderLetterText(segment, text)
+        if (segment.signoff) return <p className="invitation-signoff" key={segment.text}>{content}</p>
+        if (segment.bold) return <p key={segment.text}>{content}</p>
+        return <p key={segment.text}>{content}</p>
       })}
       <span className="sr-only" aria-live="polite">
         {complete ? letterSegments.map((segment) => segment.text).join(' ') : ''}
@@ -103,7 +138,7 @@ export default function InvitationExperience({ onClose, closeButtonRef }) {
 
     let currentCount = 0
     const interval = window.setInterval(() => {
-      currentCount += 1
+      currentCount += 4
       setCharacterCount(currentCount)
       if (currentCount >= fullLetterLength) {
         window.clearInterval(interval)

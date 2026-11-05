@@ -1246,7 +1246,16 @@ main > section:not(.is-in-view) * { animation-play-state: paused !important; }
 .mirror-shine:focus-visible { box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .16), inset 0 0 50px rgba(9, 15, 27, .7), 0 0 52px rgba(152, 196, 230, .24); }
 .mirror-shine:focus-visible { outline: 2px solid #e4d3a6; outline-offset: 4px; }
 .mirror-memory, .mirror-invitation { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 13px; max-width: 100%; }
-.mirror-memory svg { color: #d8e7f2; filter: drop-shadow(0 0 16px rgba(177, 218, 246, .72)); }
+.mirror-memory-photo {
+  display: block;
+  width: 100%;
+  max-height: 270px;
+  border: 2px solid rgba(228, 211, 166, .8);
+  border-radius: 38% 38% 5px 5px / 15% 15% 5px 5px;
+  object-fit: cover;
+  box-shadow: 0 0 24px rgba(177, 218, 246, .35);
+}
+.mirror-memory { width: 100%; }
 .mirror-memory strong { color: #f0e2c4; font: 400 1.45rem 'Pirata One', serif; text-shadow: 0 0 18px rgba(201, 222, 238, .32); }
 .mirror-memory > span { color: #c1d0da; font: .75rem Georgia, serif; }
 .mirror-invitation > svg { color: #c3dff1; filter: drop-shadow(0 0 14px rgba(152, 210, 245, .65)); }
