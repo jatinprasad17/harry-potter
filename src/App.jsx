@@ -19,7 +19,7 @@ const tracks = [
   { num: '01', title: 'Somebody To You', artist: 'The Vamps ft. Demi Lovato', tag: 'Anthem', videoId: '0go2nfVXFgA' },
   { num: '02', title: 'Can We Dance', artist: 'The Vamps', tag: 'Classic', videoId: 'UqSww10eeKw' },
   { num: '03', title: 'Ranjish Hi Sahi', artist: 'Ali Sethi · Coke Studio Pakistan', tag: 'Ghazal', videoId: 'pba_YmWDAIU' },
-  { num: '04', title: 'Arz Kiya Hai', artist: 'Anuv Jain', tag: 'Indie', videoId: 'Kg8_ADYhYWE' },
+  { num: '04', title: 'Arz Kiya Hai', artist: 'Anuv Jain', tag: 'Indie', videoId: 'bP8ATWCvqzw' },
   { num: '05', title: 'Pee Loon', artist: 'Mohit Chauhan', tag: 'Romance', videoId: 'ovR_7R9I_vI' },
 ]
 
@@ -124,6 +124,7 @@ const WizardingWireless = memo(function WizardingWireless() {
         playsinline: 1,
         rel: 0,
         origin: window.location.origin,
+        widget_referrer: `${window.location.origin}/`,
       },
       events: {
         onReady: (event) => {
@@ -175,7 +176,9 @@ const WizardingWireless = memo(function WizardingWireless() {
           if (currentVideoId && currentVideoId !== currentTrack.videoId) return
           if (playerLoadTimeoutRef.current) clearTimeout(playerLoadTimeoutRef.current)
           setPlaybackState('error')
-          setPlaybackMessage(`${currentTrack.title} is unavailable or cannot be played here.`)
+          setPlaybackMessage(event.data === 153
+            ? `YouTube could not verify the player referrer for ${currentTrack.title}. Use the YouTube link below.`
+            : `${currentTrack.title} is unavailable or cannot be played here (YouTube error ${event.data}).`)
         },
         onAutoplayBlocked: (event) => {
           const currentTrack = selectedTrackRef.current
@@ -941,8 +944,8 @@ function App() {
                 <p><strong>HOGWARTS —</strong>Witnesses report that Miss Vanshika Sharma, famously known as Bondhi, has once again demonstrated an extraordinary ability to operate entirely outside the laws of time.</p>
                 <p>Despite possessing absolutely no sense of urgency, sources confirm she can take several hours to get ready, arrive fashionably late and still somehow look like the main character. Experts remain baffled by how anyone can be this eepy and this effortlessly charming.</p>
                 <p>Academic authorities are equally confused. Reports suggest that she requires approximately one night of preparation before examinations, only to emerge the following morning with top grades. The Ministry of Magic has launched an investigation into this suspicious academic phenomenon.</p>
-                <p>But her talents don't end there. The castle has witnessed unprecedented levels of dance energy, while her flute performances have left even the most experienced wizards spellbound.Close friends describe her as "a brilliant dancer, a magical flutist, a professional procrastinator and a certified sleepyhead."</p>
-                <p>The castle advises all residents to exercise caution and beaware of my smol kitten: prolonged exposure to her smile may result in permanent attachment.</p>
+                <p>But her talents don't end there. The castle has witnessed unprecedented levels of dance energy, while her flute performances have left even the most experienced wizards spellbound. Close friends describe her as "a brilliant dancer, a magical flutist, a professional procrastinator and a certified sleepyhead."</p>
+                <p>The castle advises all residents to exercise caution and be aware of my smol kitten: prolonged exposure to her smile may result in permanent attachment.</p>
 
               </div>
             </div>
@@ -976,7 +979,7 @@ function App() {
         </section>
 
         <section className="section mirror-section" id="mirror">
-          <SectionHeading eyebrow="A WIZARDING WORLD KEEPSAKE" title="The Mirror of Erised" subtitle="Our Best Picture Together , Deserves a Separate Frame" />
+          <SectionHeading eyebrow="A WIZARDING WORLD KEEPSAKE" title="The Mirror of Erised" subtitle="Our Best Picture Together Deserves a Separate Frame" />
           <MirrorExperience />
         </section>
 

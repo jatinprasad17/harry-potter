@@ -1667,7 +1667,7 @@ footer span { padding: 0 8px; color: var(--gold); }
   overflow: auto;
   overscroll-behavior: contain;
   transform-origin: top center;
-  border: 1px solid #b5945d;
+  border: 0;
   background:
     radial-gradient(ellipse at 12% 3%, rgba(255, 255, 255, .65), transparent 46%),
     repeating-linear-gradient(0deg, rgba(106, 79, 45, .026) 0 1px, transparent 1px 4px),
@@ -1675,14 +1675,6 @@ footer span { padding: 0 8px; color: var(--gold); }
   color: #352719;
   box-shadow: 0 35px 100px rgba(0, 0, 0, .68), inset 0 0 48px rgba(124, 92, 48, .12);
   scrollbar-color: #9a7a48 #e4d4b4;
-}
-
-.birthday-letter::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1px solid rgba(141, 107, 58, .31);
-  pointer-events: none;
 }
 
 .birthday-letter-revealed { box-shadow: 0 35px 100px rgba(0, 0, 0, .6), 0 0 55px rgba(235, 187, 94, .31), inset 0 0 48px rgba(124, 92, 48, .12); }
